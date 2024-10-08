@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "user_form:build:production"
+              "buildTarget": "user_form:build:production"
             },
             "development": {
-              "browserTarget": "user_form:build:development"
+              "buildTarget": "user_form:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "user_form:build"
+            "buildTarget": "user_form:build"
           }
         },
         "test": {
