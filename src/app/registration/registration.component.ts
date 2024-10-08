@@ -1,6 +1,6 @@
 // src/app/registration/registration.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { User, UserService } from '../user.service';
 
 @Component({
@@ -9,10 +9,10 @@ import { User, UserService } from '../user.service';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  registrationForm: FormGroup;
+  registrationForm: UntypedFormGroup;
   users: User[] = [];
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: UntypedFormBuilder, private userService: UserService) {
     this.registrationForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
