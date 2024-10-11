@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/user_form",
-            "baseHref": "/your-github-repo-name/",
+            "baseHref": "/user_form/",
             "index": "src/index.html",
             "polyfills": [
               "src/polyfills.ts"
