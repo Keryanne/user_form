@@ -1,14 +1,15 @@
 {
   "name": "user-form",
   "version": "0.0.0",
+  "homepage": "https://keryanne.github.io/user_form/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href=/user_form/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +31,7 @@
     "@angular/compiler-cli": "^18.2.7",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "angular-cli-ghpages": "^2.0.1",
     "gh-pages": "^6.1.1",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
@@ -39,5 +41,4 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~5.4.5"
   }
-  
 }
