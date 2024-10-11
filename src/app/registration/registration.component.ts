@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { User, UserService } from '../user.service';
 import { calculateAge } from '../utils/age-calculator'; 
-import { nameValidator } from '../utils/custom-validators'; 
+import { nameValidator } from '../utils/custom-name-validators'; 
+import { customEmailValidator } from '../utils/custom-email-validator';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-registration',
@@ -14,11 +17,11 @@ export class RegistrationComponent implements OnInit {
   users: User[] = [];
   ageError: string | null = null;  // Pour afficher les erreurs liées à l'âge
 
-  constructor(private fb: UntypedFormBuilder, private userService: UserService) {
+  constructor(private fb: UntypedFormBuilder, private userService: UserService, private toastr: ToastrService) {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required, nameValidator()]],
       lastName: ['', [Validators.required, nameValidator()]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, customEmailValidator]],
       birthDate: ['', Validators.required],
       city: ['', [Validators.required, nameValidator()]],
       postalCode: ['', [Validators.required, Validators.pattern(/^\d{5}$/)]],
@@ -53,7 +56,7 @@ export class RegistrationComponent implements OnInit {
       // Envoi des données au service utilisateur
       this.userService.addUser(this.registrationForm.value).subscribe(() => {
         this.loadUsers();
-        alert('Inscription réussie !');  // Remplacez par un toaster en production
+        this.toastr.success('Inscription réussie !', 'Succès');
         this.registrationForm.reset();
       });
     }
