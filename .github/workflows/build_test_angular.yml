@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v2
         with: 
           node-version: ${{ matrix.node-version }}
-          
+
       - name: Install Chrome dependencies
         run: |
           sudo apt-get update
@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: ./dist
+          path: ./dist/user_form
           if-no-files-found: error
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
