@@ -7,6 +7,14 @@ import { customEmailValidator } from '../utils/custom-email-validator';
 import { ToastrService } from 'ngx-toastr';
 
 
+/**
+ * Description placeholder
+ *
+ * @export
+ * @class RegistrationComponent
+ * @typedef {RegistrationComponent}
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',

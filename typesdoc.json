@@ -1,0 +1,8 @@
+{
+  "entryPoints": ["src/index.ts"],
+  "out": "docs",
+  "tsconfig": "./tsconfig.json",
+  "exclude": ["**/*.spec.ts"],
+  "includeVersion": true,
+  "readme": "README.md"
+}
