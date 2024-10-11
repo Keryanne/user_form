@@ -26,7 +26,7 @@ jobs:
         run: |
          npm ci
          npm run build --if-present
-         npm test 
+         npm test -- --watch=false --code-coverage
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: build
+          path: ./dist
           if-no-files-found: error
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
@@ -57,10 +57,6 @@ jobs:
     needs: build_test
     # Specify runner + deployment step
     steps:
-    #  - name: Set env
-    #    run: |
-    #      npm i -g semver
-    #      echo "GITHUB_VERSION_BUILD=$(echo $(semver 0.1.1 -i prerelease --preid ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}))" >> $GITHUB_ENV
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
