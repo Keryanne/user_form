@@ -33,6 +33,9 @@
         <small *ngIf="f['birthDate'].errors?.['required']" class="error">La date de naissance est requise.</small>
       </div>
     </div>
+    <div *ngIf="ageError" class="error">
+      {{ ageError }}
+    </div>
   
     <div class="form-group">
       <label for="city">Ville</label>
