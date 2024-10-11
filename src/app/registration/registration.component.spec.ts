@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http'; // Ajoutez cette ligne
+import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './registration.component';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
@@ -8,8 +9,11 @@ describe('RegistrationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule], // Ajoutez HttpClientModule ici
-      declarations: [ RegistrationComponent ]
+      imports: [HttpClientModule,  ToastrModule.forRoot()],
+      declarations: [ RegistrationComponent ],
+      providers: [
+        ToastrService
+    ]
     })
     .compileComponents();
   });
