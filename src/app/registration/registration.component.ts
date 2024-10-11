@@ -1,8 +1,8 @@
-// src/app/registration/registration.component.ts
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { User, UserService } from '../user.service';
 import { calculateAge } from '../utils/age-calculator'; 
+import { nameValidator } from '../utils/custom-validators'; 
 
 @Component({
   selector: 'app-registration',
@@ -16,11 +16,11 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private fb: UntypedFormBuilder, private userService: UserService) {
     this.registrationForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, nameValidator()]],
+      lastName: ['', [Validators.required, nameValidator()]],
       email: ['', [Validators.required, Validators.email]],
       birthDate: ['', Validators.required],
-      city: ['', Validators.required],
+      city: ['', [Validators.required, nameValidator()]],
       postalCode: ['', [Validators.required, Validators.pattern(/^\d{5}$/)]],
     });
   }
