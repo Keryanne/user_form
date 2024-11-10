@@ -1,74 +1,41 @@
-name: Build, Test and Deploy Angular Application
-
+name: Build and Test Angular Application
+# Controls when the action will run.
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+ # Triggers the workflow on push or pull request events but only for the main branch
+ push:
+   branches: [ master ]   
+ pull_request:
+   branches: [ master ]
 
-permissions:
-  contents: write
-
-jobs:
+jobs: 
   build_test:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [21.x]
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PAT }}
 
+    strategy: 
+      matrix: 
+        node-version: [18.x]
+
+    steps: 
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
-
-        with:
+        with: 
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
-        working-directory: front
-        run: npm install
-
-      - name: Build Application
-        working-directory: front
-        run: npm run build
-
-      - name: Run Tests
-        working-directory: front
-        run: npm run test:ci
-
-      - name: Generate Documentation
-        working-directory: front
-        run: npm run docs
-
-      - name: Authenticate with npm
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
-      - name: Check if package.json version was modified
-        id: check_version
-        working-directory: front
+      - name: Install Chrome dependencies
         run: |
-          git fetch --unshallow
-          PREV_COMMIT=$(git rev-parse HEAD^)
-          OLD_VERSION=$(git show $PREV_COMMIT:front/package.json | jq -r '.version')
-          NEW_VERSION=$(jq -r '.version' package.json)
-          
-          if [ "$OLD_VERSION" != "$NEW_VERSION" ]; then
-            echo "version_changed=true" >> $GITHUB_ENV
-            echo "old_version=$OLD_VERSION" >> $GITHUB_ENV
-            echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
-          else
-            echo "version_changed=false" >> $GITHUB_ENV
-          fi
-        shell: bash {0}
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libgconf-2-4 libfontconfig1
 
-      - name: Publish package if version was updated
-        if: env.version_changed == 'true'
-        working-directory: front
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: npm ci, build and test
+        run: |
+         npm ci
+         npm run build --if-present
+         npm test -- --watch=false --code-coverage
+
+      - name: Move files to root
+        run: mv ./dist/user_form/browser* ./dist/
 
       - name: Setup Pages
         id: pages
@@ -77,25 +44,30 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: front/dist/integration_deploiement_personal_front/browser
+          # Upload entire repository
+          path: ./dist/user_form
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
+  # Deploy job
   deploy:
-    runs-on: ubuntu-latest
-    needs: build_test
+    # Deploy to the github-pages environment
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{steps.deployment.outputs.page_url}}
+    runs-on: ubuntu-latest
 
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      pages: write
-      id-token: write
-
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    
+    # Add a dependency to the build job
+    needs: build_test
+    # Specify runner + deployment step
     steps:
-      - name: Deploy to Github Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
