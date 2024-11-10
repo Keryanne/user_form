@@ -1,6 +1,6 @@
 {
-  "name": "user-form",
-  "version": "0.0.0",
+  "name": "@keryanne/user-form",
+  "version": "1.0.0",
   "homepage": "https://keryanne.github.io/user_form/",
   "scripts": {
     "ng": "ng",
