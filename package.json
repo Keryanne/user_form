@@ -25,7 +25,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^18.2.7",
     "@angular/common": "^18.2.7",
