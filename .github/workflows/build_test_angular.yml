@@ -84,6 +84,11 @@ jobs:
         with:
           node-version: 18.x
           registry-url: 'https://registry.npmjs.org/'
+      
+      - name: Configure Git
+        run: |
+          git config --global user.email "kerysie@gmail.com"
+          git config --global user.name "Keryanne"
 
       - name: Publish to npm
         env:
