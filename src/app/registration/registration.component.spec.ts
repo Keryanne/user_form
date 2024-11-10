@@ -2,30 +2,35 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './registration.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { UserService } from '../user.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { of } from 'rxjs';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
   let fixture: ComponentFixture<RegistrationComponent>;
+  let userService: UserService;
+  let toastrService: ToastrService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule,  ToastrModule.forRoot()],
-      declarations: [ RegistrationComponent ],
+      imports: [ReactiveFormsModule, FormsModule, HttpClientModule],
+      declarations: [RegistrationComponent],
       providers: [
-        ToastrService
-    ]
-    })
-    .compileComponents();
-  });
+        { provide: ToastrService, useValue: { success: jasmine.createSpy(), error: jasmine.createSpy() } },
+        UserService
+      ]
+    }).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(RegistrationComponent);
     component = fixture.componentInstance;
+    userService = TestBed.inject(UserService);
+    toastrService = TestBed.inject(ToastrService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component.registrationForm).toBeTruthy();
   });
 
   // Test postal code validation

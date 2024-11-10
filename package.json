@@ -12,6 +12,19 @@
     "deploy": "gh-pages -d dist",
     "docs": "npx typedoc"
   },
+  "author": "Keryanne ISIDORE",
+  "license": "MIT",
+  "files": [
+    "dist/user_form"
+  ],
+  "keywords": ["angular", "npm", "component"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Keryanne/user_form"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.7",

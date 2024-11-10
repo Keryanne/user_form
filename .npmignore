@@ -1,0 +1,9 @@
+node_modules
+dist/demo
+coverage
+.git
+src
+karma.conf.js
+angular.json
+tsconfig*.json
+README.md
