@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=/user_form/",
+    "build": "ng build --configuration production --base-href=/user_form/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "predeploy": "npm run build",
