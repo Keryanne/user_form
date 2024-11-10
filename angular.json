@@ -17,8 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/user_form/browser",
-            "baseHref": "https://keryanne.github.io/user_form/",
+            "outputPath": "dist/user_form",
+            "baseHref": "/user_form/",
             "index": "src/index.html",
             "polyfills": [
               "src/polyfills.ts"
@@ -36,6 +36,7 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "dist/user_form",
               "budgets": [
                 {
                   "type": "initial",
