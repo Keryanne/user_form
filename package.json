@@ -12,7 +12,7 @@
     "deploy": "gh-pages -d dist",
     "docs": "npx typedoc"
   },
-  "author": "Keryanne ISIDORE",
+  "author": "keryanne",
   "license": "MIT",
   "files": [
     "dist/user_form"
