@@ -35,7 +35,7 @@ jobs:
          npm test -- --watch=false --code-coverage
 
       - name: Move files to root
-        run: mv ./dist/user_form/browser* ./dist/
+        run: mv ./dist/user_form/browser* ./dist/user_form/
 
       - name: Setup Pages
         id: pages
