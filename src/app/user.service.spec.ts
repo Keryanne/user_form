@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http'; // Ajoutez cette ligne
+import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -7,7 +7,7 @@ describe('UserService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule], // Ajoutez HttpClientModule ici
+      imports: [HttpClientModule],
       providers: [UserService]
     });
     service = TestBed.inject(UserService);
